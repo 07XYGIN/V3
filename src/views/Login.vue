@@ -1,14 +1,28 @@
 <script lang="ts" setup>
 import { Search } from '@element-plus/icons-vue'
-import { reactive } from 'vue'
+import { reactive,ref } from 'vue'
 import { Login } from "../api/Login";
+import { useRouter } from 'vue-router'
+const router = useRouter()
+import { ElMessage } from 'element-plus'
 let form = reactive({
   username: '',
   password: ''
 })
 async function login() {
   let res = await Login(form)
-  console.log(res);
+  if (res.code == 200) {
+    ElMessage({
+      message: res.msg,
+      type: 'success',
+    })
+    router.push('/')
+  } else {
+    ElMessage({
+      message: res.msg,
+      type: 'warning',
+    })
+  }
 }
 </script>
 <template id="temp">
@@ -19,7 +33,7 @@ async function login() {
       </div>
       <div class="from">
         <el-input v-model="form.username" placeholder="账号" clearable />
-        <el-input v-model="form.password" placeholder="密码" clearable />
+        <el-input v-model="form.password" placeholder="密码" clearable type="password" />
         <el-button type="primary" :icon="Search" @click="login">登录</el-button>
       </div>
     </div>
@@ -37,7 +51,6 @@ async function login() {
   justify-content: center;
 
   .login {
-    width: 400px;
     padding: 25px 25px 5px;
     background-color: #fff;
     border-radius: 6px;
