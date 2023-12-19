@@ -1,0 +1,139 @@
+{
+	"msg": "操作成功",
+	"code": 200,
+	"data": [
+		{
+			"path": "/",
+			"hidden": false,
+			"component": "Layout",
+			"children": [
+				{
+					"name": "Clue",
+					"path": "clue",
+					"hidden": false,
+					"component": "/",
+					"meta": {
+						"title": "首页",
+						"icon": "date",
+						"noCache": false,
+						"link": null
+					}
+				}
+			]
+		},
+		{
+			"path": "/",
+			"hidden": false,
+			"component": "Layout",
+			"children": [
+				{
+					"name": "Clue",
+					"path": "clue",
+					"hidden": false,
+					"component": "tienchin/clue/index",
+					"meta": {
+						"title": "线索管理",
+						"icon": "date",
+						"noCache": false,
+						"link": null
+					}
+				}
+			]
+		},
+		{
+			"path": "/",
+			"hidden": false,
+			"component": "Layout",
+			"children": [
+				{
+					"name": "Business",
+					"path": "business",
+					"hidden": false,
+					"component": "tienchin/business/index",
+					"meta": {
+						"title": "商机管理",
+						"icon": "edit",
+						"noCache": false,
+						"link": null
+					}
+				}
+			]
+		},
+		{
+			"path": "/",
+			"hidden": false,
+			"component": "Layout",
+			"children": [
+				{
+					"name": "Contract",
+					"path": "contract",
+					"hidden": false,
+					"component": "tienchin/contract/index",
+					"meta": {
+						"title": "合同管理",
+						"icon": "documentation",
+						"noCache": false,
+						"link": null
+					}
+				}
+			]
+		},
+		{
+			"path": "/",
+			"hidden": false,
+			"component": "Layout",
+			"children": [
+				{
+					"name": "Activity",
+					"path": "activity",
+					"hidden": false,
+					"component": "tienchin/activity/index",
+					"meta": {
+						"title": "促销活动",
+						"icon": "peoples",
+						"noCache": false,
+						"link": null
+					}
+				}
+			]
+		},
+		{
+			"path": "/",
+			"hidden": false,
+			"component": "Layout",
+			"children": [
+				{
+					"name": "Course",
+					"path": "course",
+					"hidden": false,
+					"component": "tienchin/course/index",
+					"meta": {
+						"title": "私教课程",
+						"icon": "list",
+						"noCache": false,
+						"link": null
+					}
+				}
+			]
+		},
+		{
+			"path": "/",
+			"hidden": false,
+			"component": "Layout",
+			"children": [
+				{
+					"name": "Channel",
+					"path": "channel",
+					"hidden": false,
+					"component": "tienchin/channel/index",
+					"meta": {
+						"title": "渠道管理",
+						"icon": "row",
+						"noCache": false,
+						"link": null
+					}
+				}
+			]
+		}
+	]
+}
