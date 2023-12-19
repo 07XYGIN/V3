@@ -2,7 +2,7 @@
   <div class="box">
     <div class="left">
       <el-row class="tac">
-        <p>欢迎登录</p>
+        <p>欢迎使用</p>
         <el-col :span="12">
           <el-menu active-text-color="#ffd04b" background-color="#545c64" class="el-menu-vertical-demo" default-active="2"
             text-color="#fff" id="ul" v-for="item in navdata" router>

@@ -5,10 +5,12 @@ import { Login } from "../api/Login";
 import { useRouter } from 'vue-router'
 const router = useRouter()
 import { ElMessage } from 'element-plus'
+import { useStore } from '../store/index';
 let form = reactive({
   username: '',
   password: ''
 })
+const useStores = useStore()
 async function login() {
   let res = await Login(form)
   console.log(res);
@@ -18,6 +20,9 @@ async function login() {
       message: res.msg,
       type: 'success',
     })
+    useStores.setToken(res.token)
+    console.log(useStores);
+    
     router.push('/')
   } else {
     ElMessage({

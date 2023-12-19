@@ -3,31 +3,31 @@
     <el-row :gutter="20" class="l">
       <el-col :span="6" class="row">
         <div class="grid-content ep-bg-purple" />
-        <span>客户姓名</span>
-        <el-input v-model="from.name" placeholder="请输入客户姓名" clearable />
+        <span>{{ props.text.text1 }}</span>
+        <el-input v-model="from.name" :placeholder="props.text.text2" clearable />
       </el-col>
       <el-col :span="6" class="row">
         <div class="grid-content ep-bg-purple" />
-        <span>客户手机</span>
-        <el-input v-model="from.phone" placeholder="请输入客户手机号" clearable />
+        <span>{{ props.text.text3 }}</span>
+        <el-input v-model="from.phone" :placeholder="props.text.text4" clearable />
       </el-col>
       <el-col :span="6" class="row">
         <div class="grid-content ep-bg-purple" />
-        <span>归属人</span>
-        <el-input v-model="from.owner" placeholder="请输入归属人" clearable />
+        <span>{{ props.text.text5 }}</span>
+        <el-input v-model="from.owner" :placeholder="props.text.text6" clearable />
       </el-col>
       <el-col :span="6" class="row">
         <div class="grid-content ep-bg-purple" />
-        <span>渠道来源</span>
-        <el-select v-model="from.channelId" clearable placeholder="渠道来源">
+        <span>{{ props.text.text7 }}</span>
+        <el-select v-model="from.channelId" clearable :placeholder="props.text.text8">
           <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
         </el-select>
       </el-col>
     </el-row>
     <el-row :gutter="24" class="l">
       <el-col :span="8" class="row">
-        <span>线索状态</span>
-        <el-select v-model="from.status" clearable placeholder="线索状态">
+        <span>{{ props.text.text7 }}</span>
+        <el-select v-model="from.status" clearable :placeholder="props.text.text8">
           <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value" />
         </el-select>
       </el-col>
@@ -81,7 +81,7 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, defineProps } from 'vue';
+import { reactive, ref} from 'vue';
 import { Search, View } from '@element-plus/icons-vue'
 import { ElTable } from 'element-plus'
 interface User {
@@ -111,8 +111,12 @@ const props = defineProps({
     type: Array,
     required: true,
   },
+  text:{
+    type:Object,
+    required:true
+  }
 });
-console.log(props.tables);
+console.log(props.text);
 
 const multipleTableRef = ref<InstanceType<typeof ElTable>>()
 const multipleSelection = ref<User[]>([])
@@ -196,8 +200,7 @@ async function Searchs() {
 
       span {
         width: 100px;
-        display: block;
-        line-height: 32px;
+        line-height: 36px;
       }
     }
   }

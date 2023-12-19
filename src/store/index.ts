@@ -1,13 +1,18 @@
 import { defineStore } from 'pinia'
-
-export const useStore = defineStore('storeId', {
-  state: () => {
-    return {
-      counter: 0,
-      name: 'Eduardo',
-      isAdmin: true,
-    }
-  },
-  getters:{},
-  actions:{}
+import {ref} from 'vue'
+export const useStore = defineStore('storeId', ()=>{
+  const token = ref('')
+  const setToken = (newtoken:any)=>{
+    token.value = newtoken
+  }
+  const removeToken = ()=>{
+    token.value = ''
+  }
+  return {
+    token,
+    setToken,
+    removeToken
+  }
+},{
+  persist:true 
 })
