@@ -38,33 +38,33 @@
       </el-col>
     </el-row>
   </div>
-  <div class="tables">
+  <div class="tables" >
     <el-table ref="multipleTableRef" :data="props.tables" style="width: 100%" @selection-change="handleSelectionChange"
       id="t">
       <el-table-column type="selection" width="55" />
-      <el-table-column label="线索编号" width="120">
-        <template #default="scope">{{ scope.row.date }}</template>
+      <el-table-column :label="props.title.text1" width="120">
+        <template #default="scope">{{ scope.row.clueId }}</template>
       </el-table-column>
-      <el-table-column label="客户姓名" width="120">
-        <template #default="scope">{{ scope.row.date }}</template>
+      <el-table-column :label="props.title.text2" width="120">
+        <template #default="scope">{{ scope.row.name}}</template>
       </el-table-column>
-      <el-table-column label="手机号码" width="120">
-        <template #default="scope">{{ scope.row.date }}</template>
+      <el-table-column :label="props.title.text3" width="120">
+        <template #default="scope">{{ scope.row.phone}}</template>
       </el-table-column>
-      <el-table-column label="渠道来源" width="120">
-        <template #default="scope">{{ scope.row.date }}</template>
+      <el-table-column :label="props.title.text4" width="120">
+        <template #default="scope">{{ scope.row.channelName}}</template>
       </el-table-column>
-      <el-table-column label="创建时间" width="120">
-        <template #default="scope">{{ scope.row.date }}</template>
+      <el-table-column :label="props.title.text5" width="120">
+        <template #default="scope">{{ scope.row.createTime }}</template>
       </el-table-column>
-      <el-table-column label="线索归属" width="120">
-        <template #default="scope">{{ scope.row.date }}</template>
+      <el-table-column :label="props.title.text6" width="120">
+        <template #default="scope">{{ scope.row.owner }}</template>
       </el-table-column>
-      <el-table-column label="线索状态" width="120">
-        <template #default="scope">{{ scope.row.date }}</template>
+      <el-table-column :label="props.title.text7" width="120">
+        <template #default="scope">{{ scope.row.status}}</template>
       </el-table-column>
-      <el-table-column label="下次跟进时间" width="120">
-        <template #default="scope">{{ scope.row.date }}</template>
+      <el-table-column :label="props.title.text8" width="120">
+        <template #default="scope">{{ scope.row.nextTime}}</template>
       </el-table-column>
       <el-table-column label="操作" width="120">
         <el-row class="mb-4">
@@ -73,7 +73,7 @@
       </el-table-column>
     </el-table>
     <div class="demo-pagination-block">
-      <el-pagination v-model:current-page="currentPage4" v-model:page-size="pageSize4" :page-sizes="[100, 200, 300, 400]"
+      <el-pagination v-model:current-page="currentPage4" v-model:page-size="pageSize4" :page-sizes="[10,20,30,50]"
         :small="small" :disabled="disabled" :background="background" layout="total, sizes, prev, pager, next, jumper"
         :total="400" @size-change="handleSizeChange" @current-change="handleCurrentChange" id="fs" />
     </div>
@@ -108,15 +108,19 @@ const handleCurrentChange = (val: number) => {
 }
 const props = defineProps({
   tables: {
-    type: Array,
+    type: Object,
     required: true,
   },
   text:{
     type:Object,
     required:true
+  },
+  title:{
+    type:Object,
+    required:true
   }
 });
-console.log(props.text);
+console.log(props);
 
 const multipleTableRef = ref<InstanceType<typeof ElTable>>()
 const multipleSelection = ref<User[]>([])

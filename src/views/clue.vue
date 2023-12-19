@@ -1,49 +1,15 @@
 <template id="temp">
   <!-- vue实例外创建 -->
   <div>
-    <Table :tables="tables" :text="text"></Table>
+    <Table :tables="tables.data" :text="text" :title="title"></Table>
   </div>
 </template>
 <script setup lang="ts">
 import Table from '../components/table.vue'
 import { reactive } from 'vue'
-const tables = reactive([
-  {
-    date: '2016-05-03',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-02',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-04',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-01',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-08',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-06',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-07',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-])
+const tables = reactive({
+  data:[]
+})
 const text = reactive({
   text1:'客户姓名',
   text2:'请输入客户姓名',
@@ -54,13 +20,28 @@ const text = reactive({
   text7:'渠道来源',
   text8:'状态'
 })
-import {getList} from '../api/GetList'
+const title = reactive({
+  text1:'线索编号',
+  text2:'客户姓名',
+  text3:'手机号码',
+  text4:'渠道来源',
+  text5:'创建时间',
+  text6:'线索归属',
+  text7:'线索状态',
+  text8:'下次跟进时间'
+})
+import {getList,getDatalist} from '../api/GetList'
 async function get(){
   let res = await getList()
-  console.log(res);
+}
+async function getLists() {  
+  let res = await getDatalist();    
+  tables.data = res.rows;
+  console.log();
   
 }
 get()
+getLists()
 </script>
 
 <style lang="less" scoped></style>
