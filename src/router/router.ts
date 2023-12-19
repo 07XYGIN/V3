@@ -5,7 +5,13 @@ const routes = [
     path: '/login',name:'login', component: ()=>import('../views/Login.vue') 
   },
   {
-    path:'/',name:'index',component: ()=>import('../views/Index.vue')
+    path:'/',name:'index',component: ()=>import('../views/Index.vue'),
+    children:[
+      {
+        path:'/clue/index',
+        component: ()=>import('../views/clue.vue')
+      }
+    ]
   }
   // {
   //   path: '/',name:'home', component: ()=>import('../view/home.vue') ,

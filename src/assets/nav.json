@@ -30,7 +30,7 @@
 					"name": "Clue",
 					"path": "clue",
 					"hidden": false,
-					"component": "tienchin/clue/index",
+					"component": "/clue/index",
 					"meta": {
 						"title": "线索管理",
 						"icon": "date",
@@ -49,7 +49,7 @@
 					"name": "Business",
 					"path": "business",
 					"hidden": false,
-					"component": "tienchin/business/index",
+					"component": "/business/index",
 					"meta": {
 						"title": "商机管理",
 						"icon": "edit",
@@ -68,7 +68,7 @@
 					"name": "Contract",
 					"path": "contract",
 					"hidden": false,
-					"component": "tienchin/contract/index",
+					"component": "/contract/index",
 					"meta": {
 						"title": "合同管理",
 						"icon": "documentation",
@@ -87,7 +87,7 @@
 					"name": "Activity",
 					"path": "activity",
 					"hidden": false,
-					"component": "tienchin/activity/index",
+					"component": "/activity/index",
 					"meta": {
 						"title": "促销活动",
 						"icon": "peoples",
@@ -106,7 +106,7 @@
 					"name": "Course",
 					"path": "course",
 					"hidden": false,
-					"component": "tienchin/course/index",
+					"component": "/course/index",
 					"meta": {
 						"title": "私教课程",
 						"icon": "list",
@@ -125,7 +125,7 @@
 					"name": "Channel",
 					"path": "channel",
 					"hidden": false,
-					"component": "tienchin/channel/index",
+					"component": "/channel/index",
 					"meta": {
 						"title": "渠道管理",
 						"icon": "row",

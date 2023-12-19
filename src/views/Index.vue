@@ -2,6 +2,7 @@
   <div class="box">
     <div class="left">
       <el-row class="tac">
+        <p>欢迎登录</p>
         <el-col :span="12">
           <el-menu active-text-color="#ffd04b" background-color="#545c64" class="el-menu-vertical-demo" default-active="2"
             text-color="#fff" id="ul" v-for="item in navdata" router>
@@ -13,14 +14,14 @@
         </el-col>
       </el-row>
     </div>
-
+    <router-view></router-view>
   </div>
+
 </template>    
 <script lang="ts" setup>
 import { reactive } from 'vue'
 import nav from '../assets/nav.json'
 const navdata = reactive(nav.data)
-console.log(navdata);
 </script>
 
 <style lang="less">
@@ -40,7 +41,7 @@ ul {
 .box {
   width: 200px;
   height: 100vh;
-  background-color: aqua;
+  display: flex;
 
   .left {
     background-color: #545c64;
@@ -49,9 +50,24 @@ ul {
 
     .tac {
       height: 100%;
+      p{
+        width: 200px;
+        height: 56px;
+        color: #ffd04b;
+        text-align: center;
+        line-height: 56px;
+      }
+    }
+  }
+  .text{
+    width: 86vw;
+    height: 30px;
+    line-height: 30px;
+    background-color: #545c64;
+    margin: 0 0 0 10px;
+    p{
+      text-align: center;
     }
   }
 }
-
-#ul {}
 </style>
