@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { Search } from '@element-plus/icons-vue'
-import { reactive,ref } from 'vue'
+import { Search,User,Lock } from '@element-plus/icons-vue'
+import { reactive } from 'vue'
 import { Login } from "../api/Login";
 import { useRouter } from 'vue-router'
 const router = useRouter()
@@ -11,6 +11,8 @@ let form = reactive({
 })
 async function login() {
   let res = await Login(form)
+  console.log(res);
+  
   if (res.code == 200) {
     ElMessage({
       message: res.msg,
@@ -32,8 +34,8 @@ async function login() {
         <p>健身后台管理系统</p>
       </div>
       <div class="from">
-        <el-input v-model="form.username" placeholder="账号" clearable />
-        <el-input v-model="form.password" placeholder="密码" clearable type="password" />
+        <el-input v-model="form.username" placeholder="请输入账号" clearable :prefix-icon="User"/>
+        <el-input v-model="form.password" placeholder="请输入密码" clearable type="password" show-password :prefix-icon="Lock"/>
         <el-button type="primary" :icon="Search" @click="login">登录</el-button>
       </div>
     </div>
