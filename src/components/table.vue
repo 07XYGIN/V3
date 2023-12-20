@@ -16,13 +16,6 @@
         <span>{{ props.text.text5 }}</span>
         <el-input v-model="from.owner" :placeholder="props.text.text6" clearable />
       </el-col>
-      <el-col :span="6" class="row">
-        <div class="grid-content ep-bg-purple" />
-        <span>{{ props.text.text7 }}</span>
-        <el-select v-model="from.channelId" clearable :placeholder="props.text.text8">
-          <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
-        </el-select>
-      </el-col>
     </el-row>
     <el-row :gutter="24" class="l">
       <el-col :span="8" class="row">
@@ -33,12 +26,13 @@
       </el-col>
       <el-col :span="8">
         <el-row class="mb-4">
-          <el-button type="primary" :icon="Search" @click="Searchs">搜索</el-button>
+          <el-button type="primary" :icon="Search" @click="setMsg">搜索</el-button>
+          <el-button type="primary" @click="cz">重置</el-button>
         </el-row>
       </el-col>
     </el-row>
   </div>
-  <div class="tables" >
+  <div class="tables">
     <el-table ref="multipleTableRef" :data="props.tables" style="width: 100%" @selection-change="handleSelectionChange"
       id="t">
       <el-table-column type="selection" width="55" />
@@ -46,93 +40,79 @@
         <template #default="scope">{{ scope.row.clueId }}</template>
       </el-table-column>
       <el-table-column :label="props.title.text2" width="120">
-        <template #default="scope">{{ scope.row.name}}</template>
+        <template #default="scope">{{ scope.row.name }}</template>
       </el-table-column>
       <el-table-column :label="props.title.text3" width="120">
-        <template #default="scope">{{ scope.row.phone}}</template>
+        <template #default="scope">{{ scope.row.phone }}</template>
       </el-table-column>
       <el-table-column :label="props.title.text4" width="120">
-        <template #default="scope">{{ scope.row.channelName}}</template>
+        <template #default="scope">{{ scope.row.channelName }}</template>
       </el-table-column>
       <el-table-column :label="props.title.text5" width="120">
-        <template #default="scope">{{ scope.row.createTime }}</template>
+        <template #default="scope">
+          {{ days((scope.row.createTime)).format('YYYY-MM-DD') }}
+        </template>
       </el-table-column>
       <el-table-column :label="props.title.text6" width="120">
         <template #default="scope">{{ scope.row.owner }}</template>
       </el-table-column>
       <el-table-column :label="props.title.text7" width="120">
-        <template #default="scope">{{ scope.row.status}}</template>
+        <template #default="scope">
+          <template v-if="scope.row.status == 1">
+            跟进中
+          </template>
+          <template v-else>
+            已分配
+          </template>
+        </template>
       </el-table-column>
       <el-table-column :label="props.title.text8" width="120">
-        <template #default="scope">{{ scope.row.nextTime}}</template>
-      </el-table-column>
-      <el-table-column label="操作" width="120">
-        <el-row class="mb-4">
-          <el-button type="primary" round :icon="View">查看</el-button>
-        </el-row>
+        <template #default="scope">
+          {{ days((scope.row.nextTime)).format('YYYY-MM-DD') }}
+        </template>
       </el-table-column>
     </el-table>
-    <div class="demo-pagination-block">
-      <el-pagination v-model:current-page="currentPage4" v-model:page-size="pageSize4" :page-sizes="[10,20,30,50]"
-        :small="small" :disabled="disabled" :background="background" layout="total, sizes, prev, pager, next, jumper"
-        :total="400" @size-change="handleSizeChange" @current-change="handleCurrentChange" id="fs" />
-    </div>
   </div>
 </template>
-
 <script lang="ts" setup>
-import { reactive, ref} from 'vue';
-import { Search, View } from '@element-plus/icons-vue'
+import { reactive, ref } from 'vue';
+import { Search, View, Plus, Edit, Delete, Bottom } from '@element-plus/icons-vue'
 import { ElTable } from 'element-plus'
+import days from 'dayjs';
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
+days.extend(isSameOrBefore)
+days.extend(isSameOrAfter)
 interface User {
   date: string
   name: string
   address: string
 }
-const currentPage1 = ref(5)
-const currentPage2 = ref(5)
-const currentPage3 = ref(5)
-const currentPage4 = ref(4)
-const pageSize2 = ref(100)
-const pageSize3 = ref(100)
-const pageSize4 = ref(100)
-const small = ref(false)
-const background = ref(false)
-const disabled = ref(false)
 
-const handleSizeChange = (val: number) => {
-  console.log(`${val} items per page`)
-}
-const handleCurrentChange = (val: number) => {
-  console.log(`current page: ${val}`)
-}
 const props = defineProps({
   tables: {
     type: Object,
     required: true,
   },
-  text:{
-    type:Object,
-    required:true
+  text: {
+    type: Object,
+    required: true
   },
-  title:{
-    type:Object,
-    required:true
+  title: {
+    type: Object,
+    required: true
+  },
+  total: {
+    type: Number,
+    require: true
+  },
+  demo: {
+    type: String,
+    require: true
   }
 });
-console.log(props);
-
 const multipleTableRef = ref<InstanceType<typeof ElTable>>()
 const multipleSelection = ref<User[]>([])
-const toggleSelection = (rows?: User[]) => {
-  if (rows) {
-    rows.forEach((row) => {
-      multipleTableRef.value!.toggleRowSelection(row, undefined)
-    })
-  } else {
-    multipleTableRef.value!.clearSelection()
-  }
-}
 const handleSelectionChange = (val: User[]) => {
   multipleSelection.value = val
 }
@@ -177,16 +157,28 @@ const options1 = [
   },
 ]
 const from = reactive({
+  name: null,
+  phone: null,
+  owner: null,
+  channelId: null,
+  pageNum: 1,
+  pageSize: 10
+})
+const froms = reactive({
   name: '',
   phone: '',
   owner: '',
   channelId: '',
-  date: '',
-  status: ''
+  pageNum: 1,
+  pageSize: 10
 })
 //function
-async function Searchs() {
-  console.log(from);
+const emit = defineEmits(['getfrom']['cz'])
+const setMsg = () => {
+  emit('getfrom', from)
+}
+const cz = ()=>{
+  emit('cz',froms)
 }
 </script>
 

@@ -13,3 +13,10 @@ export const getDatalist = (params)=>{
     params
 })
 }
+export const getS = (params)=>{
+  return axios.request({
+    url:"/tienchin/clue/list?",
+    method:'get',
+    params
+  })
+}

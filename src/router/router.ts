@@ -10,6 +10,10 @@ const routes = [
       {
         path:'/clue/index',
         component: ()=>import('../views/clue.vue')
+      },
+      {
+        path:'/business/index',
+        component:()=>import('../views/Business.vue')
       }
     ]
   }

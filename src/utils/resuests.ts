@@ -1,14 +1,13 @@
 import axios from "axios";  
 import { useStore } from '../store/index';
 const store = useStore()
-console.log();
-  
+const token = store.token
 const instance = axios.create({  
   baseURL: '/api',  
   timeout: 6000,  
   headers: {  
     'X-Custom-Header': 'foobar',  
-    'Authorization':store.token
+    'Authorization':token
   }  
 });  
 instance.interceptors.response.use((response) => {  

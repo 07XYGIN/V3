@@ -7,6 +7,9 @@ import router from './router/router'
 import persist from 'pinia-plugin-persistedstate'
 import 'element-plus/dist/index.css'
 const app = createApp(App)
+
+import dayjs from "dayjs"
+createApp().config.globalProperties.$dayjs = dayjs;
 app.use(createPinia().use(persist))
 app.use(router)
 app.use(ElementPlus)
