@@ -76,7 +76,7 @@
 </template>
 <script lang="ts" setup>
 import { reactive, ref } from 'vue';
-import { Search, View, Plus, Edit, Delete, Bottom } from '@element-plus/icons-vue'
+import { Search } from '@element-plus/icons-vue'
 import { ElTable } from 'element-plus'
 import days from 'dayjs';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
@@ -245,5 +245,8 @@ const cz = ()=>{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.el-scrollbar__view{
+  background-color: aqua !important;
 }
 </style>

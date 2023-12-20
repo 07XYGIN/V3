@@ -14,13 +14,17 @@ const routes = [
       {
         path:'/business/index',
         component:()=>import('../views/Business.vue')
-      }
+      },
+      {
+        path:'/activity/index',
+        component:()=>import('../views/Activit.vue')
+      },
+      {
+        path:'/course/index',
+        component:()=>import('../views/course.vue')
+      },
     ]
   }
-  // {
-  //   path: '/',name:'home', component: ()=>import('../view/home.vue') ,
-  //   children: [{path: '/daping',name:'daping', component: ()=>import('../view/daping.vue') },]
-  // },
 ]
 const router = createRouter({
     history: createWebHashHistory(),

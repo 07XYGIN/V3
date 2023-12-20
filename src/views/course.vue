@@ -4,25 +4,26 @@
       <el-row :gutter="24" class="l">
         <el-col :span="6" class="row">
           <div class="grid-content ep-bg-purple">
-            <b>用户姓名</b>
+            <b>课程名称</b>
             <el-input v-model="data.from.name" placeholder="请输入客户姓名" clearable />
           </div>
         </el-col>
         <el-col :span="6" class="row">
           <div class="grid-content ep-bg-purple">
-            <b>手机号</b>
+            <b>课程类型</b>
             <el-input v-model="data.from.phone" placeholder="手机号" clearable />
           </div>
         </el-col>
         <el-col :span="6" class="row">
           <div class="grid-content ep-bg-purple">
-            <b>归属人</b>
+            <b>适用人群</b>
             <el-input v-model="data.from.owner" placeholder="归属人" clearable />
           </div>
         </el-col>
         <el-col :span="6" class="row">
           <div class="grid-content ep-bg-purple">
-            <el-button type="primary">搜索</el-button>
+            <b>最低价格 </b>
+            <el-input v-model="data.from.owner" placeholder="归属人" clearable />
           </div>
         </el-col>
       </el-row>
@@ -31,30 +32,33 @@
       <el-table ref="multipleTableRef" :data="data.options" style="width: 100%" @selection-change="handleSelectionChange"
         id="t">
         <el-table-column type="selection" width="55" />
-        <el-table-column label="客户姓名" width="120">
-          <template #default="scope">{{ scope.row.name }}</template>
+        <el-table-column label="课程编号" width="120">
+          <template #default="scope">{{ scope.row.courseId }}</template>
         </el-table-column>
-        <el-table-column label="手机号码" width="120">
-          <template #default="scope">{{ scope.row.phone }}</template>
+        <el-table-column label="课程类型" width="120">
+          <template #default="scope">{{ scope.row.type }}</template>
         </el-table-column>
-        <el-table-column label="商机归属" width="120">
-          <template #default="scope">{{ scope.row.owner }}</template>
+        <el-table-column label="课程名称" width="120">
+          <template #default="scope">{{ scope.row.info}}</template>
         </el-table-column>
-        <el-table-column label="创建时间" width="180">
-          <template #default="scope">{{ days((scope.row.createTime)).format('YYYY-MM-DD HH:mm:ss') }}</template>
+        <el-table-column label="课程价格" width="180">
+          <template #default="scope">{{ scope.row.price}}</template>
         </el-table-column>
-        <el-table-column label="商机状态" width="120">
+        <el-table-column label="课程试用人群" width="120">
           <template #default="scope">
-            <template v-if="scope.row.status == 2">
-              跟进中
+            <template v-if="scope.row.applyTo == 2">
+              上班族
             </template>
             <template v-else>
-              已分配
+              健身达人
             </template>
           </template>
         </el-table-column>
-        <el-table-column label="下次跟进时间" width="180">
-          <template #default="scope">{{ days((scope.row.nextTime)).format('YYYY-MM-DD HH:mm:ss') }}</template>
+        <el-table-column label="课程介绍" width="180">
+          <template #default="scope">{{ scope.row.info}}</template>
+        </el-table-column>
+        <el-table-column label="创建时间" width="180">
+          <template #default="scope">{{ scope.row.createTime}}</template>
         </el-table-column>
       </el-table>
       <div class="demo-pagination-block">
@@ -90,9 +94,9 @@ const data = reactive({
   total: ''
 });
 
-import { getDatalist } from '../api/business'
+import { gets  } from '../api/business'
 async function getLists() {
-  let res = await getDatalist(data.from);
+  let res = await gets (data.from);
   if (res.code != 200) {
     ElMessage({
       message: 'Token验证失败,请重新登录',
